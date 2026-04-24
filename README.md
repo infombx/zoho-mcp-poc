@@ -140,17 +140,13 @@ The Zoho MCP server exposes tools across the following apps, all accessible thro
 The agent uses OpenRouter to support a wide range of models. To change the model, update the model string in `agent.js`:
 
 ```js
-model: "qwen/qwen3-235b-a22b:free"
+
 ```
 
 Free-tier models tested with this agent include:
-
-| Model | Notes |
-|---|---|
-| `qwen/qwen3-235b-a22b:free` | Strong tool-calling performance |
-| `qwen/qwen3-30b-a3b:free` | Faster, lighter alternative |
-| `google/gemma-3-12b-it:free` | Good general reasoning |
-| `mistralai/mistral-small-3.2-24b-instruct:free` | Reliable instruction following |
+'nvidia/nemotron-3-super-120b-a12b:free',
+  'openai/gpt-oss-120b:free',
+  'qwen/qwen3-next-80b-a3b-instruct:free', 
 
 > Only Claude models can connect directly to the Cliq bot via API key. All other models run through this webhook server.
 
@@ -172,8 +168,3 @@ Free-tier models tested with this agent include:
 
 ---
 
-## Related
-
-- [Zoho MCP Documentation](https://www.zoho.com/developer/mcp.html)
-- [Zoho Cliq Bot Developer Guide](https://www.zoho.com/cliq/help/bots.html)
-- [OpenRouter API](https://openrouter.ai/docs)
