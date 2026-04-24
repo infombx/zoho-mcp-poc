@@ -1,0 +1,53 @@
+// Message Handler for Zoho Cliq Bot
+// Map this to the bot's Message Handler in the Zoho Cliq developer console.
+
+response = Map();
+
+webhook_url = "https://spicy-coats-do.loca.lt"; //change this to your generated webhook
+
+payload = Map();
+payload.put("text", message);
+if(user != null) {
+    payload.put("user", user.get("first_name"));
+}
+if(chat != null) {
+    payload.put("chat_id", chat.get("id"));
+}
+
+headerMap = Map();
+headerMap.put("Content-Type", "application/json");
+
+if (!webhook_url.endsWith("/webhook")) {
+    webhook_url = webhook_url + "/webhook";
+}
+
+try {
+    // Invoke the Node.js Webhook Server
+    apiResponse = invokeurl
+    [
+        url : webhook_url
+        type : POST
+        parameters : payload.toString()
+        headers : headerMap
+        detailed : true
+    ];
+    
+    // Detailed invokeurl returns a map containing responseCode and responseText
+    if (apiResponse.get("responseCode") != null && apiResponse.get("responseCode") == 200) {
+        responseBodyStr = apiResponse.get("responseText");
+        // Convert the string JSON into a Map
+        responseMap = responseBodyStr.toMap();
+        
+        if (responseMap != null && responseMap.containKey("text")) {
+            response.put("text", responseMap.get("text"));
+        } else {
+            response.put("text", "Agent processed your request. Output: " + responseBodyStr);
+        }
+    } else {
+        response.put("text", "Webhook request failed. Status Code: " + apiResponse.get("responseCode") + " Response: " + apiResponse.get("responseText"));
+    }
+} catch (e) {
+    response.put("text", "Error connecting to the webhook agent server: " + e);
+}
+
+return response;

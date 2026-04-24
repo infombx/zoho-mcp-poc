@@ -1,0 +1,19 @@
+{
+  "name": "webhook-to-zoho-mcp",
+  "version": "1.0.0",
+  "description": "Webhook connection from Zoho Cliq to an agent connecting to Zoho MCP",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "tunnel": "npx ngrok http 3000"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.1",
+    "axios": "^1.6.5",
+    "dotenv": "^16.4.1",
+    "express": "^4.18.2",
+    "openai": "^4.24.1"
+  }
+}
